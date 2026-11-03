@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Ag adatom random walk on Ag(111)">
+
+  <meta property="og:description"
+    content="Interactive simulation of the thermally activated random walk of a silver adatom on Ag(111).">
+
+  <meta property="og:url" content="https://detlef.diesing.pro/random-walk/">
+
+  <meta property="og:type" content="website">
+
+  <meta name="description"
+    content="Interactive physical chemistry simulation of the thermally activated random walk of a silver adatom on Ag(111).">
+
+  <link rel="stylesheet" href="labcourse.css">
+
+  <meta property="og:image" content="https://detlef.diesing.pro/random-walk/random_walk_featured_image.jpg">
+
+  <meta property="og:image:alt" content="Simulation of a silver adatom random walk on Ag(111)">
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="twitter:image" content="https://detlef.diesing.pro/random-walk/random_walk_featured_image.jpg">
+
+
+  <link rel="canonical" href="https://detlef.diesing.pro/random-walk/">
+
+  <link rel="stylesheet" href="labcourse.css">
+
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+  <script>
+    window.MathJax = {
+      tex: {
+        displayMath: [['\\[', '\\]']]
+      }
+    };
+  </script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+  </script>
+
+  <title>Ag adatom random walk on Ag(111) | Physical Chemistry</title>
+
+
+
+</head>
+
+<body>
+
+  <header class="site-header">
+
+    <div class="site-header-inner">
+
+      <div class="site-title">
+        Lab Course in Physical Chemistry
+      </div>
+
+      <img class="site-logo" src="logo_claim_ude_positiv.png" alt="University of Duisburg-Essen">
+
+    </div>
+
+  </header>
+
+  <section class="experiment-header">
+
+    <p class="experiment-number">
+      Lab Experiment N2
+    </p>
+
+    <h1>
+      One Silver Adatom Random Walk on Ag(111)
+    </h1>
+
+    <p class="authors">
+      Noel Marks · Nikolas Milchers · Detlef Diesing
+    </p>
+
+  </section>
+
+
+
+
+
+  <main>
+
+    <div class="simulation-column">
+
+      <div class="stage">
+
+        <canvas id="view" width="900" height="620" aria-label="Ag(111) terrace"></canvas>
+
+        <div class="stage-controls">
+          <button id="btnPlay" type="button">Play</button>
+
+          <button id="btnStep" class="ghost" type="button">
+            One hop
+          </button>
+
+          <button id="btnReset" class="ghost" type="button">
+            Reset same run
+          </button>
+
+          <button id="btnNewRun" class="ghost" type="button">
+            New run
+          </button>
+
+          <button id="btnSaveSvg" class="ghost export-button" type="button">
+            Save SVG
+          </button>
+        </div>
+
+        <div class="data-controls">
+          <span id="recordCount">0 states recorded </span>
+
+          <button id="btnDownloadCsv" class="ghost" type="button" disabled>
+            Download CSV
+          </button>
+        </div>
+      </div>
+
+
+
+
+      <section class="experiment-intro">
+
+        <details>
+          <summary>About the model</summary>
+          <ul class="model-notes">
+
+
+            <li>
+              Thermally activated hops on a triangular lattice of hollow sites.
+              Same model as the classroom Monte Carlo.
+
+              <span class="reference">
+                J.P. Meyburg &amp; Detlef Diesing,
+                <a href="https://doi.org/10.1021/acs.jchemed.6b01008" target="_blank" rel="noopener noreferrer">
+                  <cite>J. Chem. Educ.</cite> 2017, 94, 1225–1231
+                </a>
+              </span>
+            </li>
+
+            <li>
+              Layer B is dark, layer C is light; the adatom sits one stacking vector
+              above C.
+            </li>
+
+            <li>
+              The trail is one disk per visited site; revisits only change colour
+              and opacity.
+            </li>
+
+          </ul>
+
+        </details>
+      </section>
+
+
+
+      <section class="simulation-notes">
+        <details>
+          <summary>Simulation notes</summary>
+
+
+          <ul>
+            <li>
+              Periodic boundaries. Six equivalent nearest-neighbour hops.
+            </li>
+
+            <li>
+              Start = white disk with a horizontal bar;
+              current position = vertical bar.
+            </li>
+
+            <li>
+              For terraces larger than 100×100, layers B and C are drawn
+              as filled parallelograms with atoms only on the rim.
+            </li>
+          </ul>
+        </details>
+      </section>
+
+    </div>
+
+    <aside>
+      <div class="control-panel">
+
+        <h2 class="controls-title">Controls</h2>
+        <label class="ctrl" for="temp">temperature <span id="tempLbl">60</span> K</label>
+        <input id="temp" type="range" min="40" max="180" step="1" value="60">
+
+        <label class="ctrl" for="size">terrace size <span id="sizeLbl">40</span></label>
+        <input id="size" type="range" min="5" max="200" step="1" value="40">
+
+        <label class="ctrl" for="speed">hops per frame <span id="speedLbl">1</span></label>
+        <input id="speed" type="range" min="1" max="50" step="1" value="1">
+
+
+        <div class="music-control">
+          <label for="musicEnabled">
+            <input id="musicEnabled" type="checkbox">
+            Chemistry plays music
+          </label>
+          <p id="musicHint">
+            Musical notes for individual hops (about 8.3 hops per second).
+          </p>
+        </div>
+
+
+        <audio id="chemistryWavPlayer" preload="auto" hidden></audio>
+
+      </div>
+
+      <div class="state-panel">
+        <h2>State</h2>
+        <div class="row"><span>columns</span><span id="vCols">40</span></div>
+        <div class="row"><span>rows</span><span id="vRows">40</span></div>
+        <div class="row"><span>steps</span><span id="vSteps">0</span></div>
+        <div class="row"><span>t</span><span id="vTime">0 s</span></div>
+        <div class="row"><span>T</span><span id="vTemp">60 K</span></div>
+
+        <details>
+          <summary> Advanced statistics </summary>
+          <div class="row"><span>seed</span><span id="vSeed">—</span></div>
+          <div class="row">
+            <span>total hop rate Γ</span>
+            <span id="vRate">—</span>
+          </div>
+
+          <div class="row">
+            <span>mean waiting time ⟨τ⟩</span>
+            <span id="vTau">—</span>
+          </div>
+
+          <div class="row">
+            <span>last Δt</span>
+            <span id="vDt">—</span>
+          </div>
+
+        </details>
+
+        <div class="row"><span>max visits</span><span id="vMax">1</span></div>
+        <div class="row"><span>r²</span><span id="vMsd">0</span></div>
+        <div class="row"><span>r²<sub>max</sub></span><span id="vMsdMax">0</span></div>
+
+
+
+
+        <details class="physical-model">
+          <summary>Physical model</summary>
+
+          <div class="equations">
+
+            <p>Thermally activated hopping rate</p>
+            \[
+            k_{\mathrm{dir}} =
+            \nu_0 \exp\left(
+            -\frac{E_{\mathrm a}}{k_{\mathrm B}T}
+            \right)
+            \]
+
+            <p>Total hopping rate</p>
+            \[
+            \Gamma = 6 k_{\mathrm{dir}}
+            \]
+
+            <p>Mean waiting time</p>
+            \[
+            \langle\tau\rangle = \frac{1}{\Gamma}
+            \]
+
+            <p>Random waiting time for each hop</p>
+
+
+            <p>Random waiting time for each hop</p>
+
+            \[
+            \Delta t = -\frac{\ln U}{\Gamma},
+            \qquad 0 \lt U \lt 1
+            \]
+
+            <p>Model parameters</p>
+
+            \[
+            \begin{aligned}
+            \nu_0 &= 5\times10^{12}\,\mathrm{s}^{-1}\\
+            E_{\mathrm a} &= 0.10\,\mathrm{eV}
+            \end{aligned}
+            \]
+
+            <p>
+              Animation speed is not physical time.
+              The displayed simulation time <em>t</em> is physical time.
+            </p>
+
+          </div>
+        </details>
+      </div>
+
+    </aside>
+  </main>
+
+
+  <footer class="site-footer">
+
+    <div class="site-footer-inner">
+      LabCourse in Physical Chemistry · University of Duisburg-Essen
+    </div>
+
+  </footer>
+
+  <script src="ag111_random_walk.js?v=safari-audio-v5">
+  </script>
+
+
+
+</body>
+
+</html>
