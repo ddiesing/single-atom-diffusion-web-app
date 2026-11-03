@@ -1,0 +1,532 @@
+ :root {
+     --ink: #1a1a1a;
+     --muted: #5c5c5c;
+     --line: #cfcfc8;
+     --paper: #f4f1ea;
+     --panel: #fffdf8;
+     --accent: #8a2b12;
+     --ude: #004c93;
+ }
+
+ * {
+     box-sizing: border-box;
+ }
+
+ html,
+ body {
+     margin: 0;
+     min-height: 100%;
+ }
+
+ body {
+     min-height: 100vh;
+     display: flex;
+     flex-direction: column;
+
+     background: var(--paper);
+     color: var(--ink);
+
+     font: 15px/1.45 "Helvetica Neue", Helvetica, Arial, sans-serif;
+ }
+
+ .site-header {
+     width: 100%;
+     background: var(--panel);
+     border-top: 4px solid var(--ude);
+     border-bottom: 1px solid var(--line);
+ }
+
+ .site-header-inner {
+     max-width: 1080px;
+     width: 100%;
+     margin: 0 auto;
+     padding: 0.9rem 1.25rem;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     gap: 1rem;
+ }
+
+ .site-title {
+     color: var(--ude);
+     font-size: 1.35rem;
+     font-weight: 600;
+     letter-spacing: -0.01em;
+ }
+
+ .site-logo {
+     display: block;
+     height: 54px;
+     width: auto;
+     flex-shrink: 0;
+     margin-left: auto;
+ }
+
+ .experiment-header {
+     max-width: 1080px;
+     width: 100%;
+     margin: 0 auto;
+     padding: 0.55rem 1.25rem 0.3rem;
+ }
+
+ .experiment-number {
+     display: inline-block;
+     margin: 0 0 0.55rem;
+     padding: 0.18rem 0.5rem;
+     background: var(--ude);
+     color: white;
+     font-size: 0.82rem;
+     font-weight: 600;
+     letter-spacing: 0.04em;
+ }
+
+ .experiment-header h1 {
+     margin: 0 0 0.3rem;
+     font-size: 1.45rem;
+     font-weight: 500;
+     letter-spacing: -0.02em;
+     color: var(--ink);
+     text-wrap: balance;
+ }
+
+ .authors {
+     margin: 0;
+     font-size: 0.95rem;
+     font-weight: 500;
+     color: var(--muted);
+ }
+
+ .experiment-intro {
+     width: 100%;
+     margin: 0;
+     padding: 0.45rem 0.95rem;
+
+     background: var(--panel);
+     border: 1px solid var(--line);
+ }
+
+ .model-notes {
+     margin: 0;
+     padding-left: 1.2rem;
+     color: var(--muted);
+     font-size: 0.9rem;
+     max-width: 52rem;
+     line-height: 1.4;
+ }
+
+ .model-notes li {
+     margin: 0.2rem 0;
+ }
+
+ .reference {
+     display: block;
+     margin-top: 0.1rem;
+     font-size: 0.88rem;
+ }
+
+ .reference a {
+     color: var(--ude);
+     font-weight: 500;
+     text-decoration: underline;
+     text-underline-offset: 0.12rem;
+ }
+
+ .reference a:hover {
+     color: #0b3d8c;
+ }
+
+
+
+ .site-title {
+     font-size: 1.25rem;
+     font-weight: 600;
+     color: var(--ude);
+ }
+
+ .site-logo {
+     height: 55px;
+     width: auto;
+     display: block;
+ }
+
+
+
+
+
+ main {
+     flex: 1;
+     max-width: 1080px;
+     margin: 0 auto;
+     padding: 0.75rem 1.25rem 2rem;
+     display: grid;
+     grid-template-columns: minmax(0, 1fr) 250px;
+     gap: 1rem;
+     align-items: start;
+ }
+
+ .stage {
+     background: var(--panel);
+     border: 1px solid var(--line);
+     padding: 0.6rem;
+ }
+
+ .stage-controls {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 0.4rem;
+     align-items: center;
+
+     margin-top: 0.6rem;
+     padding-top: 0.6rem;
+
+     border-top: 1px solid var(--line);
+ }
+
+ .stage-controls .export-button {
+     margin-left: auto;
+ }
+
+ .data-controls {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     gap: 0.6rem;
+
+     margin-top: 0.45rem;
+     padding-top: 0.45rem;
+
+     border-top: 1px solid var(--line);
+
+     font-size: 0.82rem;
+     color: var(--muted);
+ }
+
+
+ canvas {
+     display: block;
+     width: 100%;
+     height: auto;
+     background: #fff;
+     cursor: crosshair;
+ }
+
+ aside {
+     background: var(--panel);
+     border: 1px solid var(--line);
+     padding: 0.85rem 0.95rem 1rem;
+ }
+
+ aside h2 {
+     font-size: 0.72rem;
+     text-transform: uppercase;
+     letter-spacing: 0.08em;
+     color: var(--muted);
+     margin: 0.15rem 0 0.55rem;
+ }
+
+ .row {
+     display: flex;
+     justify-content: space-between;
+     gap: 0.5rem;
+     font-variant-numeric: tabular-nums;
+     margin: 0.18rem 0;
+ }
+
+ .row span:last-child {
+     font-weight: 500;
+ }
+
+ label.ctrl {
+     display: block;
+     margin: 0.65rem 0 0.15rem;
+     font-size: 0.8rem;
+     color: var(--muted);
+ }
+
+ input[type="range"] {
+     width: 100%;
+ }
+
+ .btns {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 0.4rem;
+     margin: 0.8rem 0 0.2rem;
+ }
+
+ button {
+     background: var(--ink);
+     color: #fff;
+     border: 0;
+     padding: 0.38rem 0.7rem;
+     font: inherit;
+     cursor: pointer;
+ }
+
+ button.ghost {
+     background: transparent;
+     color: var(--ink);
+     border: 1px solid var(--ink);
+ }
+
+ button:disabled {
+     opacity: 0.45;
+     cursor: default;
+ }
+
+ .eq {
+     margin-top: 0.9rem;
+     font-size: 0.82rem;
+     color: var(--muted);
+ }
+
+ .eq em {
+     font-style: normal;
+     color: var(--ink);
+ }
+
+ .site-footer {
+     width: 100%;
+     margin-top: auto;
+
+     background: var(--panel);
+     border-top: 1px solid var(--line);
+ }
+
+ .site-footer-inner {
+     max-width: 1080px;
+     margin: 0 auto;
+     padding: 1rem 1.25rem;
+
+     color: var(--muted);
+     font-size: 0.82rem;
+ }
+
+
+ @media (max-width: 926px),
+ ((hover: none) and (pointer: coarse)) {
+
+     main {
+         grid-template-columns: 1fr;
+     }
+
+     .site-header-inner {
+         padding: 0.7rem 0.9rem;
+     }
+
+     .site-title {
+         font-size: 1.05rem;
+     }
+
+     .site-logo {
+         height: 42px;
+     }
+
+     .experiment-header {
+         padding: 0.9rem 0.9rem 0.45rem;
+         text-align: center;
+     }
+
+     .experiment-header h1 {
+         font-size: 1.15rem;
+     }
+
+     .authors {
+         font-size: 0.88rem;
+     }
+
+     .experiment-intro {
+         padding: 0.1rem 0.9rem 0.35rem;
+     }
+
+     .model-notes {
+         font-size: 0.88rem;
+     }
+
+ }
+
+
+ .controls-title {
+     margin-top: 0.15rem;
+ }
+
+ aside h2:not(.controls-title) {
+     margin-top: 1.25rem;
+ }
+
+ .simulation-column {
+     min-width: 0;
+     display: flex;
+     flex-direction: column;
+     gap: 0.75rem;
+ }
+
+
+ .simulation-notes {
+     width: 100%;
+     margin: 0;
+     padding: 0.85rem 0.95rem 1rem;
+
+     background: var(--panel);
+     border: 1px solid var(--line);
+
+     color: var(--muted);
+     font-size: 0.85rem;
+ }
+
+ .simulation-notes h2 {
+     margin: 0rem 0rem 0.35rem;
+     padding-left: 1.55rem;
+     border-left: 3px solid var(--ude);
+     font-size: 0.8rem;
+     font-weight: 600;
+     text-transform: uppercase;
+     letter-spacing: 0.06em;
+ }
+
+ .simulation-notes ul {
+     margin: 1.2rem;
+     padding-left: 1.2rem;
+ }
+
+ .simulation-notes li {
+     margin: 0.15rem 0;
+ }
+
+ .site-footer-inner {
+     padding-left: 0.9rem;
+     padding-right: 0.9rem;
+ }
+
+ /* ==========================================
+   Interactive Explorer: collapsible sections
+   ========================================== */
+
+ details {
+     margin: 0;
+ }
+
+ details>summary {
+     cursor: pointer;
+     color: var(--ude);
+     font-size: 0.85rem;
+     font-weight: 600;
+     line-height: 1.5;
+     padding: 0.35rem 0;
+ }
+
+ details>summary:hover {
+     text-decoration: underline;
+     text-underline-offset: 0.15rem;
+ }
+
+ details>summary:focus-visible {
+     outline: 2px solid var(--ude);
+     outline-offset: 3px;
+ }
+
+ details[open]>summary {
+     margin-bottom: 0.5rem;
+ }
+
+ /* Compact simulation notes when collapsed */
+
+ .simulation-notes {
+     padding: 0.45rem 0.95rem;
+ }
+
+ .simulation-notes ul {
+     margin: 0.4rem 0 0.5rem;
+     padding-left: 1.2rem;
+ }
+
+ /* Spacing for advanced statistics */
+
+ aside details {
+     margin: 0.6rem 0;
+     padding: 0.25rem 0;
+     border-top: 1px solid var(--line);
+     border-bottom: 1px solid var(--line);
+ }
+
+ /* Spacing for the introductory information */
+
+ .experiment-intro details {
+     margin: 0;
+ }
+
+ .experiment-intro .model-notes {
+     margin-bottom: 0.45rem;
+ }
+
+
+
+ /* ==========================================
+   Interactive Explorer: mobile layout
+   ========================================== */
+
+ @media (max-width: 926px),
+ ((hover: none) and (pointer: coarse)) {
+
+     /* Allow nested elements to participate
+       directly in the main CSS grid. */
+
+     main {
+         grid-template-columns: minmax(0, 1fr);
+     }
+
+     .simulation-column,
+     .stage,
+     aside {
+         display: contents;
+     }
+
+     /* Arrange the interface in reading order. */
+
+     #view {
+         order: 1;
+     }
+
+     .stage-controls {
+         order: 2;
+     }
+
+     .control-panel {
+         order: 3;
+     }
+
+     .data-controls {
+         order: 4;
+     }
+
+     .state-panel {
+         order: 5;
+     }
+
+     .experiment-intro {
+         order: 6;
+     }
+
+     .simulation-notes {
+         order: 7;
+     }
+
+     /* Restore panel appearance after
+       removing the aside wrapper. */
+
+     .control-panel,
+     .state-panel {
+         background: var(--panel);
+         border: 1px solid var(--line);
+         padding: 0.85rem 0.95rem 1rem;
+         min-width: 0;
+     }
+
+     /* Ensure the canvas fills available width. */
+
+     #view {
+         max-width: 100%;
+         height: auto;
+     }
+
+ }
